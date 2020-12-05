@@ -8,11 +8,15 @@ import (
 
 	"github.com/cmdaltent/advent-of-code-2020/day_4/common"
 	"github.com/cmdaltent/advent-of-code-2020/day_4/part_1"
+	"github.com/cmdaltent/advent-of-code-2020/day_4/part_2"
 )
 
 func main() {
 	log.Println("Part One")
 	processBatchFile(part_1.GeneratePassport)
+
+	log.Println("Part Two")
+	processBatchFile(part_2.GeneratePassport)
 }
 
 func processBatchFile(gen common.GeneratePassport) {
