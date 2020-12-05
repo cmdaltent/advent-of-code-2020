@@ -1,5 +1,11 @@
 package main
 
+import "log"
+
 func main() {
-	partOne()
+	log.Printf("First Part")
+	checkInput(applyRentalShopPolicy)
+
+	log.Println("Second Part")
+	checkInput(applyTobogganCorporatePolicy)
 }
