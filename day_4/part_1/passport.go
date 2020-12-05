@@ -1,6 +1,14 @@
-package main
+package part_1
 
-import "github.com/go-playground/validator/v10"
+import (
+	"github.com/go-playground/validator/v10"
+
+	"github.com/cmdaltent/advent-of-code-2020/day_4/common"
+)
+
+func GeneratePassport() common.Passport {
+	return &passport{}
+}
 
 type passport struct {
 	BirthYear      string `validate:"required"`
@@ -15,11 +23,11 @@ type passport struct {
 
 var validate = validator.New()
 
-func (p *passport) isValid() bool {
+func (p *passport) IsValid() bool {
 	return validate.Struct(p) == nil
 }
 
-func (p *passport) mergeWith(key, value string) {
+func (p *passport) MergeWith(key, value string) {
 	switch key {
 	case "byr":
 		p.BirthYear = value
