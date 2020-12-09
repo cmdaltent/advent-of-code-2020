@@ -26,5 +26,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	log.Printf("Accumulator before infinite loop: %d\n", partOne(instructionSet))
+	log.Printf("Part One: Accumulator before infinite loop: %d\n", partOne(instructionSet))
+	instructionSet = reset(instructionSet)
+	log.Printf("Part Two: Accumulator before terminate: %d\n", partTwo(instructionSet))
 }

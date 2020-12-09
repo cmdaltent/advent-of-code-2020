@@ -8,6 +8,17 @@ const (
 	nop
 )
 
+func (o operation) invert() operation {
+	switch o {
+	default:
+		return o
+	case jmp:
+		return nop
+	case nop:
+		return jmp
+	}
+}
+
 type instruction struct {
 	operation          operation
 	value              int
@@ -21,6 +32,10 @@ type programPointer struct {
 }
 
 func (pp *programPointer) next() bool {
+	if pp.currentIndex >= len(pp.instructionSet) {
+		return false
+	}
+
 	inst := pp.instructionSet[pp.currentIndex]
 	if inst.numberOfExecutions > 0 {
 		return false
