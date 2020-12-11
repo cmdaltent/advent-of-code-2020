@@ -1,32 +1,13 @@
 package main
 
 import (
-	"bufio"
 	"log"
-	"os"
-	"strconv"
+
+	"github.com/cmdaltent/advent-of-code-2020/lib"
 )
 
 func main() {
-	file, err := os.Open("day_9/input.txt")
-	if err != nil {
-		log.Fatalln(err)
-	}
-	defer file.Close()
-
-	var input []int
-
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		n, err := strconv.Atoi(scanner.Text())
-		if err != nil {
-			log.Fatalln(err)
-		}
-		input = append(input, n)
-	}
-	if err := scanner.Err(); err != nil {
-		log.Fatalln(err)
-	}
+	input := lib.ReadIntSliceFromFile("day_9/input.txt")
 
 	weakness := partOne(input, 25)
 	log.Printf("Part One: Weakness: %d\n", weakness)
