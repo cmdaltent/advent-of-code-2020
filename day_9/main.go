@@ -28,5 +28,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	log.Printf("Part One: Weakness: %d\n", partOne(input, 25))
+	weakness := partOne(input, 25)
+	log.Printf("Part One: Weakness: %d\n", weakness)
+	log.Printf("Part Two: Sum: %d\n", partTWo(input, weakness))
 }
