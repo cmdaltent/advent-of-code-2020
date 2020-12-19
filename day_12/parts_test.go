@@ -1,4 +1,4 @@
-package part_1
+package main
 
 import (
 	"testing"
@@ -14,4 +14,11 @@ func Test_PartOne(t *testing.T) {
 	require.NoError(t, err)
 
 	assert.Equal(t, 25, PartOne(navigationInstructions))
+}
+
+func Test_PartTwo(t *testing.T) {
+	navigationInstructions, err := input.ReadNavigationInstructions("testdata/partOne_test_input.txt")
+	require.NoError(t, err)
+
+	assert.Equal(t, 286, PartTwo(navigationInstructions))
 }

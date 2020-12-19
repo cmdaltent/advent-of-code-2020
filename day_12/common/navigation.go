@@ -1,5 +1,7 @@
 package common
 
+import "math"
+
 type Heading uint8
 
 const (
@@ -40,6 +42,18 @@ func (h Heading) TurnRight(degree int) Heading {
 type Position struct {
 	Y int // North/South
 	X int // East/West
+}
+
+func (p Position) RotateCounterClockwise(degrees int) Position {
+	radian := float64(degrees) * math.Pi / 180.0
+	return Position{
+		Y: int(math.Round((float64(p.Y) * math.Cos(radian)) + (float64(p.X) * math.Sin(radian)))),
+		X: int(math.Round((float64(p.X) * math.Cos(radian)) - (float64(p.Y) * math.Sin(radian)))),
+	}
+}
+
+func (p Position) RotateClockwise(degrees int) Position {
+	return p.RotateCounterClockwise(360 - degrees)
 }
 
 const (

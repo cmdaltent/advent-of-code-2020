@@ -4,7 +4,6 @@ import (
 	"log"
 
 	"github.com/cmdaltent/advent-of-code-2020/day_12/input"
-	"github.com/cmdaltent/advent-of-code-2020/day_12/part_1"
 )
 
 func main() {
@@ -13,5 +12,6 @@ func main() {
 		panic(err)
 	}
 
-	log.Printf("Part One - Manhatten Distance: %d", part_1.PartOne(navigationInstructions))
+	log.Printf("Part One - Manhatten Distance: %d", PartOne(navigationInstructions))
+	log.Printf("Part Two - Manhatten Distance: %d", PartTwo(navigationInstructions))
 }

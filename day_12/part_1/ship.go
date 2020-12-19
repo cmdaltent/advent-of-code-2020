@@ -2,47 +2,47 @@ package part_1
 
 import "github.com/cmdaltent/advent-of-code-2020/day_12/common"
 
-type ship struct {
-	position common.Position
-	heading  common.Heading
+type Ship struct {
+	Position common.Position
+	Heading  common.Heading
 }
 
-func (s *ship) Apply(ni common.NavigationInstruction) {
+func (s *Ship) Apply(ni common.NavigationInstruction) {
 	switch ni.Action {
 	case common.N:
-		s.position = common.Position{
-			Y: s.position.Y + ni.Value,
-			X: s.position.X,
+		s.Position = common.Position{
+			Y: s.Position.Y + ni.Value,
+			X: s.Position.X,
 		}
 	case common.S:
-		s.position = common.Position{
-			Y: s.position.Y - ni.Value,
-			X: s.position.X,
+		s.Position = common.Position{
+			Y: s.Position.Y - ni.Value,
+			X: s.Position.X,
 		}
 	case common.E:
-		s.position = common.Position{
-			Y: s.position.Y,
-			X: s.position.X + ni.Value,
+		s.Position = common.Position{
+			Y: s.Position.Y,
+			X: s.Position.X + ni.Value,
 		}
 	case common.W:
-		s.position = common.Position{
-			Y: s.position.Y,
-			X: s.position.X - ni.Value,
+		s.Position = common.Position{
+			Y: s.Position.Y,
+			X: s.Position.X - ni.Value,
 		}
 	case common.F:
 		s.Apply(common.NavigationInstruction{
-			Action: s.heading.ToAction(),
+			Action: s.Heading.ToAction(),
 			Value:  ni.Value,
 		})
 	case common.L:
-		s.heading = s.heading.TurnLeft(ni.Value)
+		s.Heading = s.Heading.TurnLeft(ni.Value)
 	case common.R:
-		s.heading = s.heading.TurnRight(ni.Value)
+		s.Heading = s.Heading.TurnRight(ni.Value)
 	}
 }
 
-func newShip(h common.Heading) ship {
-	return ship{
-		heading: h,
+func NewShip(h common.Heading) Ship {
+	return Ship{
+		Heading: h,
 	}
 }
