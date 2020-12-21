@@ -1,4 +1,4 @@
-package main
+package part_1
 
 import (
 	"bufio"
@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func partOne(filePath string) uint64 {
+func PartOne(filePath string) uint64 {
 	file, err := os.Open(filePath)
 	if err != nil {
 		panic(err)
@@ -27,11 +27,11 @@ func partOne(filePath string) uint64 {
 			continue
 		}
 		if strings.HasPrefix(line, "mem") {
-			memoryAddrsss, binary, err := parseValueLine(line)
+			memoryAddress, binary, err := parseValueLine(line)
 			if err != nil {
 				panic(err)
 			}
-			addressSpace[memoryAddrsss] = merge(binary, bitMask)
+			addressSpace[memoryAddress] = merge(binary, bitMask)
 		}
 	}
 	if err := scanner.Err(); err != nil {
@@ -49,8 +49,8 @@ func partOne(filePath string) uint64 {
 	return sum
 }
 
-func parseValueLine(line string) (memoryAddrsss string, binary string, err error) {
-	memoryAddrsss = parseMemoryAddress(line)
+func parseValueLine(line string) (memoryAddress string, binary string, err error) {
+	memoryAddress = parseMemoryAddress(line)
 	binary, err = parseValueAsBinary(line)
 	return
 }
