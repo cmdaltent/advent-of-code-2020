@@ -2,17 +2,13 @@ package part_1
 
 import "github.com/cmdaltent/advent-of-code-2020/day_16/common"
 
-func PartOne(fields map[string][]common.Interval, nearbyTickets [][]int) int {
+func PartOne(fields map[string]common.Constraint, nearbyTickets [][]int) int {
 	var sum int
 	for _, ticket := range nearbyTickets {
 	ticketLoop:
 		for _, v := range ticket {
-			var valid bool
-			for _, intervals := range fields {
-				for _, interval := range intervals {
-					valid = valid || interval.IsIn(v)
-				}
-				if valid {
+			for _, constraint := range fields {
+				if constraint.Satisfies(v) {
 					continue ticketLoop
 				}
 			}

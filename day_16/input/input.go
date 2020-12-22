@@ -9,7 +9,7 @@ import (
 	"github.com/cmdaltent/advent-of-code-2020/day_16/common"
 )
 
-func ReadInput(filePath string) (fields map[string][]common.Interval, myTicket []int, nearbyTickets [][]int, err error) {
+func ReadInput(filePath string) (fields map[string]common.Constraint, myTicket []int, nearbyTickets [][]int, err error) {
 	file, err := os.Open(filePath)
 	if err != nil {
 		return
@@ -40,8 +40,8 @@ func ReadInput(filePath string) (fields map[string][]common.Interval, myTicket [
 	return
 }
 
-func parseFields(scanner *bufio.Scanner) (map[string][]common.Interval, error) {
-	fields := make(map[string][]common.Interval)
+func parseFields(scanner *bufio.Scanner) (map[string]common.Constraint, error) {
+	fields := make(map[string]common.Constraint)
 	for scanner.Scan() {
 		line := scanner.Text()
 		if line == "" {
@@ -49,18 +49,28 @@ func parseFields(scanner *bufio.Scanner) (map[string][]common.Interval, error) {
 		}
 		splits := strings.Split(line, ": ")
 		intervals := strings.Split(splits[1], " or ")
-		for _, inter := range intervals {
-			minMax := strings.Split(inter, "-")
-			min, err := strconv.Atoi(minMax[0])
-			if err != nil {
-				return nil, err
-			}
-			max, err := strconv.Atoi(minMax[1])
-			if err != nil {
-				return nil, err
-			}
-			fields[splits[0]] = append(fields[splits[0]], common.Interval{Min: min, Max: max})
+
+		minMax1 := strings.Split(intervals[0], "-")
+		min1, err := strconv.Atoi(minMax1[0])
+		if err != nil {
+			return nil, err
 		}
+		max1, err := strconv.Atoi(minMax1[1])
+		if err != nil {
+			return nil, err
+		}
+
+		minMax2 := strings.Split(intervals[1], "-")
+		min2, err := strconv.Atoi(minMax2[0])
+		if err != nil {
+			return nil, err
+		}
+		max2, err := strconv.Atoi(minMax2[1])
+		if err != nil {
+			return nil, err
+		}
+
+		fields[splits[0]] = common.Constraint{Inter1: common.Interval{Min: min1, Max: max1}, Inter2: common.Interval{Min: min2, Max: max2}}
 	}
 	if err := scanner.Err(); err != nil {
 		return nil, err
