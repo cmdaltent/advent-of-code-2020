@@ -1,6 +1,6 @@
 package main
 
-func partOne(startingNumbers []int, terminationRound int) int {
+func play(startingNumbers []int, terminationRound int) int {
 	brain := make(map[int][]int)
 	for i, number := range startingNumbers {
 		brain[number] = append(brain[number], i+1)
